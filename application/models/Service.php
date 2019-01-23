@@ -105,9 +105,7 @@ class Service extends CI_Model {
             array (
                 'type' => 'carousel',
                 'contents' =>
-                    array (
-                        $datas
-                    ),
+                    $datas
             )
         );
     }

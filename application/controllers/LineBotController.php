@@ -47,10 +47,10 @@ class LineBotController extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
-	public function test()
-    {
-        return $this->Service->getService();
-    }
+//	public function test()
+//    {
+//        print_r($this->Service->getService());
+//    }
 
 	public function webhook()
     {
@@ -75,34 +75,17 @@ class LineBotController extends CI_Controller {
                                 $result = $this->bot->replyText($event['replyToken'],
                                     "Halo juga, Kak ".$result->getJSONDecodedBody()['displayName']);
                                 return $result->getHTTPStatus();
-//                            case 'cari jasa':
-//                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-//                                    'replyToken' => $event['replyToken'],
-//                                    'messages' => [
-//                                        [
-//                                            'type' => 'flex',
-//                                            'altText' => 'Flex Message',
-//                                            'contents' => json_decode($this->Service->getService()),
-//                                        ]
-//                                    ],
-//                                ]);
-//                                return $result->getHTTPStatus();
-                            case 'browse equipment':
-                                // get from endpoint
-                                $flexTemplate = file_get_contents($this->Service->getService());
+                            case 'cari jasa':
                                 $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                                     'replyToken' => $event['replyToken'],
                                     'messages' => [
                                         [
                                             'type' => 'flex',
                                             'altText' => 'Flex Message',
-                                            'contents' => json_decode($flexTemplate, true),
+                                            'contents' => json_decode($this->Service->getService()),
                                         ]
                                     ],
                                 ]);
-
-                                error_log(json_decode($flexTemplate));
-
                                 return $result->getHTTPStatus();
                         }
                     }

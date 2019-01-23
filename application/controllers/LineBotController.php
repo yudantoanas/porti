@@ -74,8 +74,8 @@ class LineBotController extends CI_Controller {
                         switch (strtolower($event['message']['text'])) {
                             case 'halo':
                                 $result = $this->bot->getProfile($event['source']['userId']);
-                                $result = $this->bot->replyText($event['replyToken'],
-                                    "Halo juga, Kak ".$result->getJSONDecodedBody()['displayName']);
+//                                $result = $this->bot->replyText($event['replyToken'],"Halo juga, Kak ".$result->getJSONDecodedBody()['displayName']);
+                                $result = $this->bot->replyText($event['replyToken'], "hehehehe");
                                 return $result->getHTTPStatus();
 //                            case 'cari jasa':
 //                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [

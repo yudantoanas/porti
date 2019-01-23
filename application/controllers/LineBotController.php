@@ -91,19 +91,19 @@ class LineBotController extends CI_Controller {
 //                                return $result->getHTTPStatus();
                             case 'browse equipment':
                                 // get from endpoint
-                                $flexTemplate = file_get_contents("event-line.json");
+//                                $flexTemplate = file_get_contents("event-line.json");
                                 $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                                     'replyToken' => $event['replyToken'],
                                     'messages' => [
                                         [
                                             'type' => 'flex',
                                             'altText' => 'Flex Message',
-                                            'contents' => json_decode($flexTemplate)
+                                            'contents' => json_decode($this->Service->getService())
                                         ]
                                     ],
                                 ]);
 
-                                error_log(json_decode($flexTemplate));
+                                error_log(json_decode($this->Service->getService()));
 
                                 return $result->getHTTPStatus();
                         }

@@ -98,7 +98,7 @@ class LineBotController extends CI_Controller {
                                         [
                                             'type' => 'flex',
                                             'altText' => 'Flex Message',
-                                            'contents' => json_decode($this->Service->getService())
+                                            'contents' => json_decode($this->Service->getService()),
                                         ]
                                     ],
                                 ]);

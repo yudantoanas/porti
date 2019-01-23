@@ -49,9 +49,7 @@ class LineBotController extends CI_Controller {
 
 	public function test()
     {
-        $flexTemplate = file_get_contents("event-line.json");
-
-        var_dump(json_decode($flexTemplate));
+        return $this->Service->getService();
     }
 
 	public function webhook()
@@ -91,19 +89,19 @@ class LineBotController extends CI_Controller {
 //                                return $result->getHTTPStatus();
                             case 'browse equipment':
                                 // get from endpoint
-//                                $flexTemplate = file_get_contents("event-line.json");
+                                $flexTemplate = file_get_contents($this->Service->getService());
                                 $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                                     'replyToken' => $event['replyToken'],
                                     'messages' => [
                                         [
                                             'type' => 'flex',
                                             'altText' => 'Flex Message',
-                                            'contents' => json_decode($this->Service->getService()),
+                                            'contents' => json_decode($flexTemplate, true),
                                         ]
                                     ],
                                 ]);
 
-                                error_log(json_decode($this->Service->getService()));
+                                error_log(json_decode($flexTemplate));
 
                                 return $result->getHTTPStatus();
                         }

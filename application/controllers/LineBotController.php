@@ -74,17 +74,8 @@ class LineBotController extends CI_Controller {
                         switch (strtolower($event['message']['text'])) {
                             case 'halo':
                                 $result = $this->bot->getProfile($event['source']['userId']);
-//                                $result = $this->bot->replyText($event['replyToken'],"Halo juga, Kak ".$result->getJSONDecodedBody()['displayName']);
-//                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-//                                    'replyToken' => $event['replyToken'],
-//                                    'messages' => [
-//                                        [
-//                                            'type' => 'flex',
-//                                            'altText' => 'Flex Message',
-//                                            'contents' => json_decode($this->Service->getService()),
-//                                        ]
-//                                    ],
-//                                ]);
+                                $result = $this->bot->replyText($event['replyToken'],
+                                    "Halo juga, Kak ".$result->getJSONDecodedBody()['displayName']);
                                 return $result->getHTTPStatus();
 //                            case 'cari jasa':
 //                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
@@ -101,18 +92,19 @@ class LineBotController extends CI_Controller {
                             case 'browse equipment':
                                 // get from endpoint
                                 $flexTemplate = file_get_contents("event-line.json");
+                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                                    'replyToken' => $event['replyToken'],
+                                    'messages' => [
+                                        [
+                                            'type' => 'flex',
+                                            'altText' => 'Flex Message',
+                                            'contents' => json_decode($flexTemplate)
+                                        ]
+                                    ],
+                                ]);
 
-                                $result = $this->bot->replyText($event['replyToken'], $this->Service->getService());
-//                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-//                                    'replyToken' => $event['replyToken'],
-//                                    'messages' => [
-//                                        [
-//                                            'type' => 'flex',
-//                                            'altText' => 'Flex Message',
-//                                            'contents' => json_decode($flexTemplate)
-//                                        ]
-//                                    ],
-//                                ]);
+                                error_log(json_decode($flexTemplate));
+
                                 return $result->getHTTPStatus();
                         }
                     }

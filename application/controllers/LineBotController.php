@@ -77,19 +77,19 @@ class LineBotController extends CI_Controller {
                                 $result = $this->bot->replyText($event['replyToken'],
                                     "Halo juga, Kak ".$result->getJSONDecodedBody()['displayName']);
                                 return $result->getHTTPStatus();
-                            case 'cari jasa':
-                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                                    'replyToken' => $event['replyToken'],
-                                    'messages' => [
-                                        [
-                                            'type' => 'flex',
-                                            'altText' => 'Flex Message',
-                                            'contents' => json_decode($this->Service->getService()),
-                                        ]
-                                    ],
-                                ]);
-                                return $result->getHTTPStatus();
-                            /*case 'browse equipment':
+//                            case 'cari jasa':
+//                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+//                                    'replyToken' => $event['replyToken'],
+//                                    'messages' => [
+//                                        [
+//                                            'type' => 'flex',
+//                                            'altText' => 'Flex Message',
+//                                            'contents' => json_decode($this->Service->getService()),
+//                                        ]
+//                                    ],
+//                                ]);
+//                                return $result->getHTTPStatus();
+                            case 'browse equipment':
                                 // get from endpoint
                                 $flexTemplate = file_get_contents("event-line.json");
 
@@ -103,7 +103,7 @@ class LineBotController extends CI_Controller {
                                         ]
                                     ],
                                 ]);
-                                return $result->getHTTPStatus();*/
+                                return $result->getHTTPStatus();
                         }
                     }
                 }

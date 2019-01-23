@@ -93,7 +93,7 @@ class LineBotController extends CI_Controller {
                                 // get from endpoint
                                 $flexTemplate = file_get_contents("event-line.json");
 
-                                $result = $this->bot->replyText($event['replyToken'], $flexTemplate);
+                                $result = $this->bot->replyText($event['replyToken'], "hehehehe");
 //                                $result = $this->httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
 //                                    'replyToken' => $event['replyToken'],
 //                                    'messages' => [
